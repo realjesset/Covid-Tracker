@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgba($color: #e7e7e7, $alpha: 1);
+  font-family: "Raleway", sans-serif;
+}
+
+.container {
+  display: flex;
+  background-color: "#23272a";
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
