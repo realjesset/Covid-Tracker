@@ -7,8 +7,11 @@ body {
 
 .container {
   display: flex;
-  background-color: "#23272a";
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  ::selection {
+    background-color: #8e44ad !important;
+    color: white !important;
+  }
 }

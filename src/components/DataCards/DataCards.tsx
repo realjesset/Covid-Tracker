@@ -1,87 +1,72 @@
 import React from "react";
-
-import { Grid } from "@material-ui/core";
-import cx from "classnames";
-
-// ---- Modules ----
-
-import { DataCardModule } from "../@modules";
-
+import { Grid, Typography } from "@material-ui/core";
+import { Card, Title } from "../@common";
 import styles from "./DataCards.module.scss";
+import icon from "./recovered.svg";
+import { WaveTopBottomLoading } from "react-loadingg";
 
-class DataCards extends DataCardModule {
-  // getCards(data: {}) {
-  //   return Object.keys(data).map((item, index) => "hello");
-  // }
-  render() {
-    const {
-      data: { cases, deaths, recovered, updatedDate },
-    } = this.props;
-
-    const data = getData(cases, deaths, recovered);
-
-    if (!cases) return <h1>loading</h1>;
-    else
-      return (
-        <div className={styles.container}>
-          <Grid container spacing={3} justify="center">
-            {this.renderData(
-              ["cases", "recovered", "deaths"],
-              data,
-              new Date(updatedDate)
-            )}
-          </Grid>
-        </div>
-      );
-  }
+interface Props {
+  country: string;
+  date: Date;
+  data: Data;
 }
 
-function getData(cases: number, recovered: number, deaths: number) {
-  let data = {
-    cases: {
-      heading: "Confirmed Cases",
-      value: cases,
-      body: (
-        <p>
-          Total number of infected patients of <strong>COVID-19</strong>
-        </p>
-      ),
-      className: cx(styles.card, styles.confirmed),
-      options: {
-        xs: 12,
-        md: 3,
-      },
-    },
-    recovered: {
-      heading: "Recovered Patients",
-      value: recovered,
-      body: (
-        <p>
-          Number of patients recovered from <strong>COVID-19</strong>
-        </p>
-      ),
-      className: cx(styles.card, styles.recovered),
-      options: {
-        xs: 12,
-        md: 3,
-      },
-    },
-    deaths: {
-      heading: "Total Deaths",
-      value: deaths,
-      body: (
-        <p>
-          Total deaths caused by <strong>COVID-19</strong>{" "}
-        </p>
-      ),
-      className: cx(styles.card, styles.deaths),
-      options: {
-        xs: 12,
-        md: 3,
-      },
-    },
+interface Data {
+  active: { title: string; value: number; footer: string; svg: JSX.Element };
+  cases: { title: string; value: number; footer: string; svg: JSX.Element };
+  deaths: { title: string; value: number; footer: string; svg: JSX.Element };
+  recovered: { title: string; value: number; footer: string; svg: JSX.Element };
+  todayCases: {
+    title: string;
+    value: number;
+    footer: string;
+    badge: boolean;
   };
-  return data;
+  todayDeaths: {
+    title: string;
+    value: number;
+    footer: string;
+    badge: boolean;
+  };
+}
+
+class DataCards extends React.Component<Props> {
+  componentDidMount() {}
+
+  renderCards = (data: Data) => {
+    return Object.entries(data).map((value) => (
+      <Grid key={value[0]} item xs={12} sm={4}>
+        <Card
+          title={value[1].title}
+          value={value[1].value}
+          footer={value[1].footer}
+          chip={value[1].badge || false}
+          key={value[0]}
+          style={[styles[value[0]]]}
+          svg={value[1].svg || null}
+        />
+      </Grid>
+    ));
+  };
+
+  render() {
+    const { country, date, data } = this.props;
+    if (!date) return <WaveTopBottomLoading />;
+    return (
+      <React.Fragment>
+        <Title country={country} date={date} />
+        <Grid
+          className={styles.container}
+          container
+          xs={12}
+          sm={12}
+          spacing={2}
+        >
+          {this.renderCards(data)}
+        </Grid>
+      </React.Fragment>
+    );
+  }
 }
 
 export default DataCards;

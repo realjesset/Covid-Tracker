@@ -2,16 +2,18 @@ import { Url } from "url";
 
 export type API_Global_Value_Detail = {
   value: number;
-  detail: Url;
+  detail: Url | null;
 };
-export type API_Global_Data = {
-  confirmed: API_Global_Value_Detail;
-  recovered: API_Global_Value_Detail;
-  deaths: API_Global_Value_Detail;
-  lastUpdate: string;
-};
+export type API_Global_Data = [
+  {
+    confirmed: API_Global_Value_Detail;
+    recovered: API_Global_Value_Detail;
+    deaths: API_Global_Value_Detail;
+    lastUpdate: Date;
+  }
+];
 
-export type DailyData = {
+export type API_Data = {
   updated: number;
   cases: number;
   todayCases: number;
@@ -28,14 +30,14 @@ export type DailyData = {
   country?: string;
 };
 
-export type SimpleDailyData = {
+export type SimplifiedDailyData = {
   cases: number;
-  active?: number;
+  active: number;
   deaths: number;
   country?: string | null;
   recovered: number;
-  updatedDate: string | number;
-  todayCases?: number;
-  todayDeaths?: number;
+  updated: Date;
+  todayCases: number;
+  todayDeaths: number;
   tests?: number;
 };

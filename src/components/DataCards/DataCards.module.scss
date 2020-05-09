@@ -1,18 +1,44 @@
 .container {
-  margin: 50px 0;
+  width: fit-content !important ;
+  justify-content: center !important;
+  // padding: 0px 0px !important;
+}
+
+.heading {
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.cardGrid {
+  padding: 0px 0px !important;
 }
 
 .card {
   margin: 0 1% !important;
   padding-bottom: 0px !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.cases {
+  border-bottom: solid 5px #fdff78 !important;
 }
 
-.confirmed {
-  border-bottom: 10px solid rgba($color: #f1f516, $alpha: 0.8);
+.todayCases {
+  border-bottom: solid 5px #fdff78 !important;
 }
+.todayDeaths {
+  border-bottom: solid 5px #f65858 !important;
+}
+
 .deaths {
-  border-bottom: 10px solid rgba($color: #ff0000, $alpha: 0.8);
+  border-bottom: solid 5px #f65858 !important;
 }
 .recovered {
-  border-bottom: 10px solid rgba($color: #00ff00, $alpha: 0.8);
+  border-bottom: solid 5px #47fd9c !important;
+}
+.active {
+  border-bottom: solid 5px #2196f3 !important;
+}
+
+@media only screen and (min-width: 1090px) {
 }

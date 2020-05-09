@@ -1,50 +1,47 @@
-import React, { Component } from "react";
+import React from "react";
 
 // ---- Components ----
-import { DataCards, Chart, CountryPicker, NavBar } from "./components";
+import { Home } from "./components";
 // ---- Common Components ----
 // import { ThemeButton } from "./components/@common";
-// ---- Contexts ----
-// import ThemeContextProvider from "./contexts/ThemeContext";
 // ---- Style ----
-import styles from "./App.modules.scss";
-import { ThemeProvider, createMuiTheme } from "@material-ui/core";
+import styles from "./App.module.scss";
+import { ThemeProvider, createMuiTheme, CssBaseline } from "@material-ui/core";
 // ---- Dependencies ----
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { fetchDailyData } from "./api";
-import { DailyData, SimpleDailyData } from "./typings/API";
+import { Switch, Route } from "react-router-dom";
 
-class App extends Component {
-  state = {
-    data: {} as SimpleDailyData,
-    countries: [],
-  };
+// import { SimplifiedDailyData } from "./typings/API";
 
-  async componentDidMount() {
-    const data = await fetchDailyData();
-    this.setState({ data });
-  }
-
-  handleChange = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log("woahahhhh");
-  };
-
-  render() {
-    const theme = createMuiTheme({
+class App extends React.Component {
+  changeTheme = (dark: boolean) => {
+    return createMuiTheme({
       palette: {
-        type: "light",
+        type: dark ? "dark" : "light",
+        background: {
+          default: dark ? "#000000" : "#fafafa",
+          paper: dark ? "#1f1f1f" : "#fff",
+        },
+      },
+      breakpoints: {
+        values: {
+          xs: 890,
+          sm: 900,
+          md: 960,
+          lg: 1280,
+          xl: 1920,
+        },
       },
     });
-
-    const { data } = this.state;
-
+  };
+  render() {
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={this.changeTheme(true)}>
         <div className={styles.container}>
-          <NavBar />
-          <DataCards data={data} />
-          <CountryPicker />
-          <Chart />
+          <CssBaseline />
+          <Switch>
+            <Route path="/:country">adwa</Route>
+            <Route exact path="/" component={Home}></Route>
+          </Switch>
         </div>
       </ThemeProvider>
     );
