@@ -73,7 +73,7 @@ const Search = ({ countries, onCountryChange, styles = [] }: Props) => {
         </Grid>
       )}
       renderInput={(params) => (
-        <Grid sm={12} xs={12}>
+        <Grid>
           <CustomTextField
             {...params}
             label="Search"

@@ -96,13 +96,7 @@ class DataCards extends React.Component<Props> {
     return (
       <React.Fragment>
         <Title country={info.country || "Global"} date={info.updated} />
-        <Grid
-          className={styles.container}
-          container
-          xs={12}
-          sm={12}
-          spacing={2}
-        >
+        <Grid className={styles.container} container spacing={2}>
           {this.renderCards(data)}
         </Grid>
       </React.Fragment>

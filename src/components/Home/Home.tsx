@@ -51,7 +51,6 @@ class Home extends Component<RouteComponentProps> {
       errors.push(error);
       this.setState({ errors });
     }
-    console.log(data);
     this.setState({ data, countries, loading: false });
   };
 
@@ -68,7 +67,7 @@ class Home extends Component<RouteComponentProps> {
     return (
       <React.Fragment>
         <Header></Header>
-        <Grid justify="center" container xs={12} sm={6} alignItems="center">
+        <Grid justify="center" container alignItems="center">
           {loading ? null : (
             <Search
               styles={[styles.search]}
