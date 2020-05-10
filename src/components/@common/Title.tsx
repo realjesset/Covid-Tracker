@@ -11,6 +11,7 @@ const Title = ({ country, date }: { country: string; date: Date }) => {
           fontFamily: "Quicksand",
           fontWeight: "bold",
           textTransform: "uppercase",
+          textAlign: "center",
         }}
       >
         {country ? country : "Global"}
