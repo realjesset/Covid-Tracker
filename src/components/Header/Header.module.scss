@@ -1,0 +1,55 @@
+.container {
+  //   width: fit-content !important;
+  margin-top: 20px !important;
+  //   justify-content: center !important;
+}
+
+.title {
+  font-family: "Quicksand", sans-serif !important;
+  float: left;
+  font-weight: bolder !important;
+  .subtitle {
+    justify-content: center !important;
+    align-self: center !important;
+  }
+}
+
+// .containerSwitch {
+//   //   padding: 0 0px !important;
+// }
+// .btnSwitch {
+//   float: right;
+// }
+
+// .containerButtons {
+//   //   float: right !important;
+//   //   align-content: right !important;
+//   padding: 0 80px !important;
+// }
+
+// .btnSupport {
+//   float: right;
+//   align-content: right;
+// }
+
+@media only screen and (min-width: 900px) {
+  .container {
+    width: unset;
+    max-width: 1000px !important;
+    margin-left: 50px !important;
+  }
+  .title {
+    float: none !important;
+    .subtitle {
+      justify-content: center !important;
+      align-self: center !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .subtitle {
+    padding-left: 45px;
+    text-align: center;
+  }
+}

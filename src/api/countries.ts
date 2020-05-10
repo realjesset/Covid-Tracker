@@ -1215,7 +1215,7 @@ export const Countries: Array<Country> = [
   {
     name: "United Arab Emirates",
     iso2: "AE",
-    iso3: "ARE",
+    iso3: "UAE",
     flag: "https://disease.sh/assets/img/flags/ae.png",
   },
   {

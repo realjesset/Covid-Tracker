@@ -2,6 +2,7 @@
   width: fit-content !important ;
   justify-content: center !important;
   // padding: 0px 0px !important;
+  // max-width: 50% !important;
 }
 
 .heading {
@@ -19,26 +20,63 @@
   justify-content: center !important;
   align-items: center !important;
 }
-.cases {
-  border-bottom: solid 5px #fdff78 !important;
+
+@media only screen and (min-width: 900px) {
+  .container {
+    width: fit-content !important ;
+    justify-content: center !important;
+    // padding: 0px 0px !important;
+    // min-width: 800px !important;
+    max-width: 1000px !important;
+  }
+  .todayCases {
+    border-bottom: solid 5px #fdff78 !important;
+    border-bottom-left-radius: unset !important;
+    border-bottom-right-radius: unset !important;
+  }
+  .todayDeaths {
+    border-bottom: solid 5px #f65858 !important;
+    border-bottom-left-radius: unset !important;
+    border-bottom-right-radius: unset !important;
+  }
+
+  .cases {
+    border-bottom: solid 5px rgba($color: #000000, $alpha: 0) !important;
+  }
+  .deaths {
+    border-bottom: solid 0px rgba($color: #000000, $alpha: 0) !important;
+  }
+  .recovered {
+    border-bottom: solid 5px rgba($color: #000000, $alpha: 0) !important;
+  }
+  .active {
+    border-bottom: solid 5px rgba($color: #000000, $alpha: 0) !important;
+  }
 }
 
-.todayCases {
-  border-bottom: solid 5px #fdff78 !important;
-}
-.todayDeaths {
-  border-bottom: solid 5px #f65858 !important;
-}
+@media only screen and (max-width: 1090px) {
+  .cases {
+    border-bottom: solid 5px rgba($color: #000000, $alpha: 0) !important;
+  }
 
-.deaths {
-  border-bottom: solid 5px #f65858 !important;
-}
-.recovered {
-  border-bottom: solid 5px #47fd9c !important;
-}
-.active {
-  border-bottom: solid 5px #2196f3 !important;
-}
+  .todayCases {
+    border-bottom: solid 5px #fdff78 !important;
+    border-bottom-left-radius: unset !important;
+    border-bottom-right-radius: unset !important;
+  }
+  .todayDeaths {
+    border-bottom: solid 5px #f65858 !important;
+    border-bottom-left-radius: unset !important;
+    border-bottom-right-radius: unset !important;
+  }
 
-@media only screen and (min-width: 1090px) {
+  .deaths {
+    border-bottom: solid 5px rgba($color: #000000, $alpha: 0) !important;
+  }
+  .recovered {
+    border-bottom: solid 5px rgba($color: #000000, $alpha: 0) !important;
+  }
+  .active {
+    border-bottom: solid 5px rgba($color: #000000, $alpha: 0) !important;
+  }
 }

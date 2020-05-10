@@ -25,14 +25,16 @@ type CardProps = {
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    root: {},
+    title: {
+      fontSize: "1rem",
+    },
     card: {
       padding: "20px 20px",
       margin: "0 5%",
       marginTop: "10px",
       borderRadius: "15px",
-      borderBottomLeftRadius: "unset",
-      borderBottomRightRadius: "unset",
+      // borderBottomLeftRadius: "unset",
+      // borderBottomRightRadius: "unset",
       boxShadow: "0 0px 20px 0.2px rgba(0, 0, 0, 0.2)",
     },
 
@@ -42,7 +44,7 @@ const useStyles = makeStyles((theme) =>
     badge: {
       float: "right",
       fontWeight: "bold",
-      color: theme.palette.type === "dark" ? purple[400] : purple[400],
+      color: theme.palette.type === "dark" ? deepPurple[400] : deepPurple[400],
       background: theme.palette.type === "dark" ? grey[300] : grey[200],
     },
     side_icon: {
@@ -81,12 +83,15 @@ const Card = (props: CardProps) => {
             svg
           )}
         </span>
-
         <CardContent className={classes.cardContent}>
-          <Typography color="textSecondary" variant="overline" gutterBottom>
+          <Typography
+            color="textSecondary"
+            variant="overline"
+            gutterBottom
+            className={classes.title}
+          >
             {title}
           </Typography>
-
           <Typography color="textPrimary" variant="h3">
             <Count
               start={0}
@@ -96,9 +101,9 @@ const Card = (props: CardProps) => {
               className={classes.value}
             ></Count>
           </Typography>
-          {/* <Typography color="textSecondary" variant="body2">
+          <Typography color="textSecondary" variant="body2">
             {footer}
-          </Typography> */}
+          </Typography>
         </CardContent>
       </CardComponent>
     </Grid>

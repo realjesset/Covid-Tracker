@@ -5,26 +5,30 @@ import file, { fstat } from "fs";
 
 const url = "https://disease.sh/v2";
 
-export async function fetchGlobalData(): Promise<SimplifiedDailyData | void> {
+interface FetchReturn {
+  data: SimplifiedDailyData | null;
+  error: string | null;
+}
+
+export async function fetchData(
+  country: string | null = null
+): Promise<FetchReturn> {
   try {
-    const { data } = (await axios.get(`${url}/all`)) as { data: API_Data };
-    const modifidied: SimplifiedDailyData = {
-      cases: data.cases,
-      deaths: data.deaths,
-      recovered: data.recovered,
-      updated: new Date(data.updated || Date.now()),
-      active: data.active,
-      tests: data.tests,
-      todayCases: data.todayCases,
-      todayDeaths: data.todayDeaths,
-    };
-    return modifidied;
-  } catch (error) {
-    console.log(error);
-    if (error.response && error.response === "404") {
-      alert("Fetching of data not found");
+    if (country && country !== "Global") {
+      const { data }: { data: API_Data } = await axios.get(
+        `${url}/countries/${country}`
+      );
+      return { data: convertToSimpleData(data), error: null };
     } else {
-      alert("Unexpected error");
+      const { data }: { data: API_Data } = await axios.get(`${url}/all`);
+
+      return { data: convertToSimpleData(data), error: null };
+    }
+  } catch (error) {
+    if (error.response && error.response === "404") {
+      return { data: null, error: "Error while fetching data" };
+    } else {
+      return { data: null, error: "Unexpected error" };
     }
   }
 }
@@ -33,31 +37,17 @@ export function getCountries() {
   return Countries;
 }
 
-export async function getCountryData(
-  country: string
-): Promise<SimplifiedDailyData | void> {
-  try {
-    const { data } = (await axios.get(`${url}/${country}`)) as {
-      data: API_Data;
-    };
-    const modifidied: SimplifiedDailyData = {
-      country: data.country,
-      cases: data.cases,
-      deaths: data.deaths,
-      recovered: data.recovered,
-      updated: new Date(data.updated || Date.now()),
-      active: data.active,
-      tests: data.tests,
-      todayCases: data.todayCases,
-      todayDeaths: data.todayDeaths,
-    };
-    return modifidied;
-  } catch (error) {
-    console.log(error);
-    if (error.response && error.response === "404") {
-      alert("Fetching of data not found");
-    } else {
-      alert("Unexpected error");
-    }
-  }
+function convertToSimpleData(oldData: API_Data) {
+  const data: SimplifiedDailyData = {
+    country: oldData.country,
+    cases: oldData.cases,
+    deaths: oldData.deaths,
+    recovered: oldData.recovered,
+    active: oldData.active,
+    tests: oldData.tests,
+    todayCases: oldData.todayCases,
+    todayDeaths: oldData.todayDeaths,
+    updated: new Date(oldData.updated || Date.now()),
+  };
+  return data;
 }

@@ -1,12 +1,20 @@
 import React, { Component } from "react";
-import { TextField, Grid, Switch, withStyles } from "@material-ui/core";
-import { Autocomplete } from "@material-ui/lab";
+import {
+  TextField,
+  Grid,
+  Switch,
+  withStyles,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
+import { Autocomplete, Alert } from "@material-ui/lab";
 
 import { deathsIcon, activeIcon, recoveredIcon, casesIcon } from "../../assets";
 
-import { fetchGlobalData, getCountries } from "../../api";
+import { fetchData, getCountries } from "../../api";
 import { SimplifiedDailyData } from "../../api/API";
-import { DataCards } from "..";
+import { DataCards, Header, Footer } from "..";
+import { Error, Search } from "../@common";
 import { RouteComponentProps } from "react-router-dom";
 
 import styles from "./Home.module.scss";
@@ -21,122 +29,56 @@ const CustomTextField = withStyles({
   },
 })(TextField);
 
-interface Props {}
-interface State {}
-
-class Home extends Component<RouteComponentProps, State> {
+class Home extends Component<RouteComponentProps> {
   state = {
     data: {} as SimplifiedDailyData,
     countries: [{}] as [
-      { name: string; code: string; iso3: string; flag: string }
+      { name: string; iso2: string; iso3: string; flag: string }
     ],
+    errors: [] as string[],
+    loading: true,
   };
 
-  componentDidMount() {
-    const fetchAPI = async () => {
-      const data = await fetchGlobalData();
-      const countries = getCountries();
-      return { data, countries };
-    };
-
-    const fetchedData = fetchAPI();
-    fetchedData.then((res) => {
-      if (res.data && res.countries)
-        this.setState({ data: res.data, countries: res.countries });
-    });
+  async componentDidMount() {
+    this.handleData();
   }
+
+  handleData = async (country = this.props.match.params["country"]) => {
+    const { data, error } = await fetchData(country);
+    const countries = getCountries();
+    if (error) {
+      const errors = this.state.errors;
+      errors.push(error);
+      this.setState({ errors });
+    }
+    console.log(data);
+    this.setState({ data, countries, loading: false });
+  };
 
   handleCountry = (value) => {
     if (!value) return;
-    console.log(this.props.history.push("/" + value.name));
+    this.props.history.push("/" + value.name);
+    this.setState({ loading: true });
+    this.handleData(value.name);
   };
 
   render() {
-    const { data, countries } = this.state;
+    const { data, countries, errors, loading } = this.state;
+    if (errors.length >= 1) return <Error errors={errors} />;
     return (
       <React.Fragment>
-        <Switch></Switch>
-        {/* max width by query for this -> */}
+        <Header></Header>
         <Grid justify="center" container xs={12} sm={6} alignItems="center">
-          <Autocomplete
-            fullWidth
-            options={countries}
-            autoHighlight
-            onChange={(event, value) => this.handleCountry(value)}
-            openOnFocus
-            getOptionLabel={(option) => option.name}
-            renderOption={(option) => (
-              <React.Fragment>
-                <Grid container spacing={2}>
-                  <Grid item>
-                    <img
-                      style={{ width: "32px", height: "20px" }}
-                      src={option.flag}
-                      alt={option.code}
-                    />
-                  </Grid>
-                  <Grid item>{option.name}</Grid>
-                </Grid>
-              </React.Fragment>
-            )}
-            renderInput={(params) => (
-              <Grid sm={12} xs={12}>
-                <CustomTextField
-                  {...params}
-                  label="Pick a country"
-                  color="primary"
-                  variant="outlined"
-                  inputProps={{
-                    ...params.inputProps,
-                    autoComplete: "new-password", // disable autocomplete and autofill
-                  }}
-                />
-              </Grid>
-            )}
-          />
+          {loading ? null : (
+            <Search
+              styles={[styles.search]}
+              countries={countries}
+              onCountryChange={this.handleCountry}
+            />
+          )}
         </Grid>
-        <DataCards
-          country={data.country || "Global"}
-          date={data.updated}
-          data={{
-            todayCases: {
-              title: "Cases",
-              value: data.todayCases,
-              footer: "New confirmed cases of COVID-19",
-              badge: true,
-            },
-            todayDeaths: {
-              title: "Deaths",
-              value: data.todayDeaths,
-              footer: "New Deaths that have occured by COVID-19",
-              badge: true,
-            },
-            active: {
-              title: "Active Cases",
-              value: data.active,
-              footer: "On-going COVID-19 cases",
-              svg: <img src={activeIcon} alt="active"></img>,
-            },
-            cases: {
-              title: "Cases",
-              value: data.cases,
-              footer: "Total confirmed cases",
-              svg: <img src={casesIcon} alt="cases"></img>,
-            },
-            recovered: {
-              title: "Recovered",
-              value: data.recovered,
-              footer: "Patients Recovered from COVID-19",
-              svg: <img src={recoveredIcon} alt="recovered"></img>,
-            },
-            deaths: {
-              title: "Deaths",
-              value: data.deaths,
-              footer: "Deaths caused by COVID-19",
-              svg: <img src={deathsIcon} alt="deaths"></img>,
-            },
-          }}
-        ></DataCards>
+        <DataCards data={data} loading={loading}></DataCards>
+        {loading ? null : <Footer></Footer>}
       </React.Fragment>
     );
   }

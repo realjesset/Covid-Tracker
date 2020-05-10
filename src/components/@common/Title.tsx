@@ -26,7 +26,7 @@ const Title = ({ country, date }: { country: string; date: Date }) => {
         last updated on{" "}
         {date.getDate().toString().length === 1
           ? "0" + date.getDate()
-          : date.getDate() + 1}
+          : date.getDate()}
         /
         {date.getMonth().toString().length === 1
           ? "0" + (date.getMonth() + 1)
