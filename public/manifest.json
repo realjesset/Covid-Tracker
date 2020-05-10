@@ -1,11 +1,11 @@
 {
-  "short_name": "COVID-19 Tracker ",
+  "short_name": "COVID-19 Tracker",
   "name": "A simple covid-19 tracker",
   "icons": [
     {
       "src": "logo.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "image/png"
     }
   ],
   "start_url": ".",
