@@ -7,6 +7,12 @@ type Country = {
 
 export const Countries: Array<Country> = [
   {
+    name: "Global",
+    iso2: null,
+    iso3: null,
+    flag: "https://img.icons8.com/color/48/000000/europe.png",
+  },
+  {
     name: "Afghanistan",
     iso2: "AF",
     iso3: "AFG",

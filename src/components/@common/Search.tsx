@@ -43,48 +43,44 @@ const Search = ({ countries, onCountryChange, styles = [] }: Props) => {
         );
       }}
       renderOption={(option) => (
-        <Grid
-          key={option.iso2}
-          container
-          spacing={2}
-          alignItems="center"
-          // style={{ backgroundColor: "black" }}
-        >
-          <Grid
-            item
-            // style={{
-            //   borderRightWidth: 1,
-            //   paddingBottom: 0,
-            //   borderRightColor: "#B39DDB",
-            //   borderRightStyle: "solid",
-            // }}
-            alignItems="center"
-          >
-            <img
-              style={{
-                width: "32px",
-                height: "20px",
-              }}
-              src={option.flag}
-              alt={option.iso2}
-            />
+        <Grid key={option.iso2} container spacing={2} alignItems="center">
+          <Grid item>
+            {option.name === "Global" ? (
+              <img
+                style={{
+                  width: "32px",
+                  height: "32px",
+                }}
+                src={option.flag}
+                alt={option.iso2}
+              />
+            ) : (
+              <img
+                style={{
+                  width: "32px",
+                  height: "20px",
+                }}
+                src={option.flag}
+                alt={option.iso2}
+              />
+            )}
           </Grid>
-          <Grid item>{`${option.name} (${option.iso2 || option.iso3})`}</Grid>
+          <Grid item>{`${option.name} ${
+            option.iso2 || option.iso3 ? `(${option.iso2 || option.iso3})` : ""
+          }`}</Grid>
         </Grid>
       )}
       renderInput={(params) => (
-        <Grid>
-          <CustomTextField
-            {...params}
-            label="Search"
-            variant="outlined"
-            style={{ borderColor: "#B39DDB !important" }}
-            inputProps={{
-              ...params.inputProps,
-              autoComplete: "new-password", // disable autocomplete and autofill
-            }}
-          />
-        </Grid>
+        <CustomTextField
+          {...params}
+          label="Search"
+          variant="outlined"
+          style={{ borderColor: "#B39DDB !important" }}
+          inputProps={{
+            ...params.inputProps,
+            autoComplete: "new-password", // disable autocomplete and autofill
+          }}
+        />
       )}
     />
   );

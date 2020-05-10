@@ -8,7 +8,7 @@ import {
   makeStyles,
   createStyles,
 } from "@material-ui/core";
-import { grey, deepPurple } from "@material-ui/core/colors";
+import { grey, deepPurple, red } from "@material-ui/core/colors";
 import cx from "classnames";
 import Count from "react-countup";
 
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) =>
     badge: {
       float: "right",
       fontWeight: "bold",
-      color: theme.palette.type === "dark" ? deepPurple[400] : deepPurple[400],
+      color: theme.palette.type === "dark" ? red[400] : red[400],
       background: theme.palette.type === "dark" ? grey[300] : grey[200],
     },
     side_icon: {
@@ -73,7 +73,7 @@ const Card = (props: CardProps) => {
           <Chip
             variant="default"
             size="small"
-            label="New"
+            label="🔴Live"
             className={classes.badge}
           ></Chip>
         ) : (

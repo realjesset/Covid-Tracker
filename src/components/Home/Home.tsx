@@ -24,6 +24,7 @@ class Home extends Component<RouteComponentProps> {
   }
 
   handleData = async (country = this.props.match.params["country"]) => {
+    console.log(country);
     const { data, error } = await fetchData(country);
     const countries = getCountries();
     if (error) {
@@ -36,6 +37,11 @@ class Home extends Component<RouteComponentProps> {
 
   handleCountry = (value) => {
     if (!value) return;
+    if (value.name === "Global") {
+      this.props.history.push("/");
+      this.setState({ loading: true });
+      return this.handleData(null);
+    }
     this.props.history.push("/" + value.name);
     this.setState({ loading: true });
     this.handleData(value.name);
