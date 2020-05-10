@@ -1,15 +1,5 @@
 import React, { Component } from "react";
-import {
-  TextField,
-  Grid,
-  Switch,
-  withStyles,
-  makeStyles,
-  Typography,
-} from "@material-ui/core";
-import { Autocomplete, Alert } from "@material-ui/lab";
-
-import { deathsIcon, activeIcon, recoveredIcon, casesIcon } from "../../assets";
+import { Grid } from "@material-ui/core";
 
 import { fetchData, getCountries } from "../../api";
 import { SimplifiedDailyData } from "../../api/API";
@@ -18,16 +8,6 @@ import { Error, Search } from "../@common";
 import { RouteComponentProps } from "react-router-dom";
 
 import styles from "./Home.module.scss";
-
-const CustomTextField = withStyles({
-  root: {
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderRadius: `50px`,
-      },
-    },
-  },
-})(TextField);
 
 class Home extends Component<RouteComponentProps> {
   state = {

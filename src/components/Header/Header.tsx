@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 
-import { Grid, Typography, Button, Switch, Container } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import styles from "./Header.module.scss";
+import { logo } from "../../assets";
 
 const Header = (props) => {
   return (
@@ -9,11 +10,21 @@ const Header = (props) => {
       <Grid className={styles.container} container justify="center" spacing={0}>
         <Grid item sm={12}>
           <Typography className={styles.title} variant="h4">
-            <span role="img">🦠</span> COVID-19 Tracker
+            <img
+              src={logo}
+              alt="idk"
+              style={{
+                width: 45,
+                height: 45,
+                float: "inherit",
+                verticalAlign: "top",
+              }}
+            />
+            COVID-19 Tracker
             <br></br>
-            <Typography className={styles.subtitle} variant="body1">
-              Track Coronavirus COVID-19 outbreak
-            </Typography>
+          </Typography>
+          <Typography className={styles.subtitle} variant="body1">
+            Track Coronavirus COVID-19 outbreak
           </Typography>
         </Grid>
       </Grid>

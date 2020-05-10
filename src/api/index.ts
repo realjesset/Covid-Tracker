@@ -1,7 +1,6 @@
 import { API_Data, SimplifiedDailyData } from "./API";
 import axios from "axios";
 import { Countries } from "./countries";
-import file, { fstat } from "fs";
 
 const url = "https://disease.sh/v2";
 
