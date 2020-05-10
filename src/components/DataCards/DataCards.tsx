@@ -92,7 +92,7 @@ class DataCards extends React.Component<Props> {
   render() {
     const { data: info, loading } = this.props;
     const data = this.renderData(info);
-    if (loading) return <WaveTopBottomLoading />;
+    if (loading) return <WaveTopBottomLoading color="#BAB7B7" />;
     return (
       <React.Fragment>
         <Title country={info.country || "Global"} date={info.updated} />
