@@ -1,18 +1,5 @@
 import { Url } from "url";
 
-export type API_Global_Value_Detail = {
-  value: number;
-  detail: Url | null;
-};
-export type API_Global_Data = [
-  {
-    confirmed: API_Global_Value_Detail;
-    recovered: API_Global_Value_Detail;
-    deaths: API_Global_Value_Detail;
-    lastUpdate: Date;
-  }
-];
-
 export type API_Data = {
   updated: number;
   cases: number;
