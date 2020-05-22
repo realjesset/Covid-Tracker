@@ -1,11 +1,18 @@
-import React from 'react';
-import styles from './main.module.scss';
+import React from "react";
+import styles from "./main.module.scss";
 
-import { Header, CountryHeader, InfoCards, Footer, Search, CountryCharts } from '..';
-import { RenderErrorBox } from '../common';
+import {
+  Header,
+  CountryHeader,
+  InfoCards,
+  Footer,
+  Search,
+  CountryCharts,
+} from "..";
+import { RenderErrorBox } from "../common";
 
-import { Country, APICountry, fetchData } from '../../api';
-import { RouteComponentProps } from 'react-router-dom';
+import { Country, APICountry, fetchData } from "../../api";
+import { RouteComponentProps } from "react-router-dom";
 
 interface State {
   data?: APICountry;
@@ -13,11 +20,14 @@ interface State {
   loading: boolean;
 }
 
-class Main extends React.Component<RouteComponentProps<{ country?: string }>, State> {
+class Main extends React.Component<
+  RouteComponentProps<{ country?: string }>,
+  State
+> {
   state = {
     data: {} as APICountry,
     errors: [] as string[],
-    loading: true
+    loading: true,
   };
 
   componentDidMount() {
@@ -25,7 +35,9 @@ class Main extends React.Component<RouteComponentProps<{ country?: string }>, St
   }
 
   async handleData(country?: string) {
-    const { data, error } = await fetchData(country || this.props.match.params.country || 'global');
+    const { data, error } = await fetchData(
+      country || this.props.match.params.country || "global"
+    );
     if (error && !data) {
       const errors = [...this.state.errors];
       errors.push(error);
@@ -37,7 +49,9 @@ class Main extends React.Component<RouteComponentProps<{ country?: string }>, St
 
   handleCountry = (value: Country | null) => {
     if (!value) return null;
-    this.props.history.push(`/${value.name.toLowerCase() === 'global' ? '' : value.name}`);
+    this.props.history.push(
+      `/${value.name.toLowerCase() === "global" ? "" : value.name}`
+    );
     this.setState({ loading: true });
     // get data for the country
     this.handleData(value.name);
@@ -57,12 +71,12 @@ class Main extends React.Component<RouteComponentProps<{ country?: string }>, St
             <React.Fragment>
               <Search onCountryChange={this.handleCountry} />
               <CountryHeader
-                name={data.country || 'Global'}
+                name={data.country || "Global"}
                 date={data.updated}
                 flag={data.countryInfo && data.countryInfo.flag}
               />
               <InfoCards data={data} loading={loading} />
-              <CountryCharts country={data.country || 'Global'} />
+              <CountryCharts country={data.country || "Global"} />
               <Footer />
             </React.Fragment>
           )}

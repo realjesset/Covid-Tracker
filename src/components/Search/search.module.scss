@@ -9,3 +9,8 @@
     max-width: 90% !important;
   }
 }
+.searchBox {
+  .MuiOutlinedInput-notchedOutline {
+    border-radius: 20px;
+  }
+}

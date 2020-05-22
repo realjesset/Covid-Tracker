@@ -1,23 +1,40 @@
-import React from 'react';
+import React from "react";
 
-import styles from './search.module.scss';
-import { Country, getCountries } from '../../api';
+import styles from "./search.module.scss";
+import { Country, getCountries } from "../../api";
 
-import { Autocomplete, FilterOptionsState } from '@material-ui/lab';
-import { TextField, Grid, withStyles, createStyles } from '@material-ui/core';
+import { Autocomplete, FilterOptionsState } from "@material-ui/lab";
+import {
+  TextField,
+  Grid,
+  withStyles,
+  createStyles,
+  makeStyles,
+} from "@material-ui/core";
 
-const CustomTextField = withStyles(theme =>
+const CustomTextField = withStyles((theme) =>
   createStyles({
     root: {
-      '& .MuiOutlinedInput-root': {
-        '& fieldset': {
+      "&.MuiOutlinedInput-root": {
+        "&.fieldset": {
           borderRadius: `20px`,
-          color: theme.palette.primary.main
-        }
-      }
-    }
+          color: theme.palette.primary.main,
+        },
+        "&.MuiOutlinedInput-notchedOutline": {
+          borderRadius: `20px`,
+        },
+      },
+    },
   })
 )(TextField);
+
+const useStyle = makeStyles(
+  createStyles({
+    "&.MuiOutlinedInput-notchedOutline": {
+      borderRadius: `20px`,
+    },
+  })
+);
 
 interface Props {
   onCountryChange: Function;
@@ -25,10 +42,18 @@ interface Props {
 
 function filterOptions(options: Country[], state: FilterOptionsState<Country>) {
   return options.filter(
-    option =>
-      (option.iso2 && option.iso2.toLowerCase().match(state.inputValue && state.inputValue.toLowerCase())) ||
-      (option.iso3 && option.iso3.toLowerCase().match(state.inputValue && state.inputValue.toLowerCase())) ||
-      option.name.toLowerCase().match(state.inputValue && state.inputValue.toLowerCase())
+    (option) =>
+      (option.iso2 &&
+        option.iso2
+          .toLowerCase()
+          .match(state.inputValue && state.inputValue.toLowerCase())) ||
+      (option.iso3 &&
+        option.iso3
+          .toLowerCase()
+          .match(state.inputValue && state.inputValue.toLowerCase())) ||
+      option.name
+        .toLowerCase()
+        .match(state.inputValue && state.inputValue.toLowerCase())
   );
 }
 
@@ -40,7 +65,7 @@ function optionRenderer(option: Country) {
       spacing={2}
       alignItems="center"
       style={{
-        textAlign: 'center'
+        textAlign: "center",
       }}
     >
       <Grid item>
@@ -49,38 +74,55 @@ function optionRenderer(option: Country) {
           alt={option.name}
           style={{
             width: 32,
-            height: option.name === 'Global' ? 32 : 20,
-            verticalAlign: 'middle'
+            height: option.name === "Global" ? 32 : 20,
+            verticalAlign: "middle",
           }}
         />
       </Grid>
-      <Grid item>{`${option.name} ${option.iso2 || option.iso3 ? `(${option.iso2 || option.iso3})` : ''}`}</Grid>
+      <Grid item>{`${option.name} ${
+        option.iso2 || option.iso3 ? `(${option.iso2 || option.iso3})` : ""
+      }`}</Grid>
     </Grid>
   );
 }
 
 const Search = ({ onCountryChange }: Props) => {
+  const classes = useStyle();
   return (
     <React.Fragment>
-      <Grid container item className={styles.container} xs={12} sm={12} justify="center">
+      <Grid
+        container
+        item
+        className={styles.container}
+        xs={12}
+        sm={12}
+        justify="center"
+      >
         <Autocomplete
           fullWidth
           options={getCountries()}
           autoHighlight
-          onChange={(event: any, value: Country | null) => onCountryChange(value)}
+          onChange={(event: any, value: Country | null) =>
+            onCountryChange(value)
+          }
           openOnFocus
-          getOptionLabel={option => option.name}
+          getOptionLabel={(option) => option.name}
           clearOnEscape
           filterOptions={(options, state) => filterOptions(options, state)}
-          renderOption={option => optionRenderer(option)}
-          renderInput={params => (
+          renderOption={(option) => optionRenderer(option)}
+          renderInput={(params) => (
             <CustomTextField
               {...params}
               label="Search"
               variant="outlined"
+              InputProps={{
+                classes: {
+                  notchedOutline: classes["&.MuiOutlinedInput-notchedOutline"],
+                },
+              }}
               inputProps={{
                 ...params.inputProps,
-                autoComplete: 'new-password' // disable autocomplete and autofill
+                autoComplete: "new-password", // disable autocomplete and autofill
               }}
             />
           )}
