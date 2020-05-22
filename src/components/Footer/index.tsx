@@ -7,7 +7,7 @@ import { ThemeContext } from "../../contexts/";
 import { Grid, Icon } from "@material-ui/core";
 import { BrightnessHigh, NightsStay, FavoriteSharp } from "@material-ui/icons";
 
-const Footer = (props: any) => {
+const Footer = () => {
   const { currentTheme, setTheme } = useContext(ThemeContext);
 
   return (

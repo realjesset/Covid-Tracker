@@ -1,11 +1,11 @@
-import React from 'react';
-import styles from './header.module.scss';
+import React from "react";
+import styles from "./header.module.scss";
 
-import { logo } from '../../assets';
-import { RenderButton, RenderNotificaion } from '../common';
+import { logo } from "../../assets";
+import { RenderButton, RenderNotificaion } from "../common";
 
-import { LocalCafeOutlined } from '@material-ui/icons';
-import { Grid, Typography } from '@material-ui/core';
+import { LocalCafeOutlined } from "@material-ui/icons";
+import { Grid, Typography, Link } from "@material-ui/core";
 
 const Header: React.FC = (props) => {
   return (
@@ -19,9 +19,15 @@ const Header: React.FC = (props) => {
           </Typography>
         </Grid>
         <Grid item className={styles.btnContainer} sm={6}>
-          <RenderButton variant="outlined" href="https://ko-fi.com/glider" startIcon={<LocalCafeOutlined />}>
-            <span>Buy me a coffee</span>
-          </RenderButton>
+          <Link
+            href="https://ko-fi.com/glider"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <RenderButton variant="outlined" startIcon={<LocalCafeOutlined />}>
+              <span>Buy me a coffee</span>
+            </RenderButton>
+          </Link>
         </Grid>
         <Grid item className={styles.subtitleContainer} xs={12} sm={12}>
           <Typography className={styles.subtitle} variant="body1">

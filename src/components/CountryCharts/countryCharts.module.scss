@@ -19,7 +19,7 @@
   margin-bottom: 30px;
   max-width: 1025px !important;
   border-radius: 10px;
-  // box-shadow: 0 0px 20px 0.2px rgba(0, 0, 0, 0.2);
+  min-width: 300px !important;
   justify-self: center !important;
 }
 
@@ -34,7 +34,7 @@
 
 @media only screen and (min-width: 900px) {
   .chartContainer {
-    height: 720px !important;
+    height: 600px !important;
   }
 }
 
@@ -45,7 +45,7 @@
   }
 
   .chartContainer {
-    height: 650px !important;
+    height: 600px !important;
   }
 }
 
@@ -56,6 +56,6 @@
   }
 
   .chartContainer {
-    max-height: 350px !important;
+    max-height: 450px !important;
   }
 }
