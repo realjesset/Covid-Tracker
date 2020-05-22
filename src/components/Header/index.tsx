@@ -15,7 +15,7 @@ const Header: React.FC = (props) => {
         <Grid item className={styles.titleContainer} xs={12} sm={6}>
           <Typography className={styles.title} variant="h4">
             <img src={logo} alt="logo" className={styles.logo} />
-            <a href="/covid">COVID-19</a> Tracker
+            COVID-19 Tracker
           </Typography>
         </Grid>
         <Grid item className={styles.btnContainer} sm={6}>

@@ -93,14 +93,8 @@ const RenderChart: React.FC<ChartProps> = ({
   }
 
   const options = (title: string): ChartOptions => ({
-    legend: { position: "bottom", fullWidth: true, align: "center" },
+    legend: { position: "top", fullWidth: true, align: "center" },
     maintainAspectRatio: false,
-    title: {
-      text: title,
-      position: "top",
-      fullWidth: true,
-      fontColor: "black",
-    },
     // tooltips: {
     //   backgroundColor: palette.type === 'dark' ? palette.divider : palette.divider,
     //   bodyFontColor: palette.text.primary,
@@ -152,7 +146,7 @@ const RenderChart: React.FC<ChartProps> = ({
       <Line
         data={{
           labels: Object.entries(all.timeline.cases).map(
-            ([date]) => `${moment(date).format("MMMM Do")}`
+            ([date]) => `${moment(date).format("MMM Do")}`
           ),
           datasets:
             label === "All"
@@ -174,7 +168,7 @@ const RenderChart: React.FC<ChartProps> = ({
         options={options("Daily")}
         data={{
           labels: Object.entries(daily.timeline.cases).map(
-            ([date]) => `${moment(date).format("MMMM Do")}`
+            ([date]) => `${moment(date).format("MMM Do")}`
           ),
           datasets: [
             {

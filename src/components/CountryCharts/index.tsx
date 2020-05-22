@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react';
-import styles from './countryCharts.module.scss';
+import React from "react";
+import styles from "./countryCharts.module.scss";
 
-import { RenderChart, RenderToggleButtons } from '../common';
-import { fetchHistoryAll, APIHistoricalRegion, fetchHistory } from '../../api';
+import { RenderChart, RenderToggleButtons } from "../common";
+import { fetchHistoryAll, APIHistoricalRegion, fetchHistory } from "../../api";
 
-import { Grid } from '@material-ui/core';
-import { ToggleButtonProps } from '@material-ui/lab';
-import clsx from 'clsx';
+import { Grid } from "@material-ui/core";
+import { ToggleButtonProps } from "@material-ui/lab";
+import clsx from "clsx";
 
-type GraphView = 'All' | 'Cases' | 'Deaths' | 'Recovered';
-type GraphType = 'Linear' | 'Logarithmic' | 'Daily';
+type GraphView = "All" | "Cases" | "Deaths" | "Recovered";
+type GraphType = "Linear" | "Logarithmic" | "Daily";
 
 interface Props {
   country: string;
@@ -29,8 +29,8 @@ class CountryCharts extends React.Component<Props, State> {
     all: {} as APIHistoricalRegion,
     daily: {} as APIHistoricalRegion,
     errors: [] as string[],
-    graphType: 'Linear' as GraphType,
-    graphView: 'All' as GraphView
+    graphType: "Linear" as GraphType,
+    graphView: "All" as GraphView,
   };
 
   componentDidMount() {
@@ -39,7 +39,10 @@ class CountryCharts extends React.Component<Props, State> {
 
   async handleData() {
     const country = this.props.country;
-    const { data, error } = country.toLowerCase() === 'global' ? await fetchHistoryAll() : await fetchHistory(country);
+    const { data, error } =
+      country.toLowerCase() === "global"
+        ? await fetchHistoryAll()
+        : await fetchHistory(country);
     let errors = [...this.state.errors];
     if (error) errors.push(error);
 
@@ -48,40 +51,87 @@ class CountryCharts extends React.Component<Props, State> {
       : this.setState({ errors: errors });
   }
 
-  handleChange = (event: React.MouseEvent<HTMLElement, MouseEvent>, value: any): void => {
-    if (!value) return this.setState({ errors: [...this.state.errors, 'something went wrong...'] });
-    if (value === 'All' || value === 'Cases' || value === 'Deaths' || value === 'Recovered')
-      return value === 'All' && (this.state.graphType === 'Logarithmic' || this.state.graphType === 'Linear')
+  handleChange = (
+    event: React.MouseEvent<HTMLElement, MouseEvent>,
+    value: any
+  ): void => {
+    if (!value)
+      return this.setState({
+        errors: [...this.state.errors, "something went wrong..."],
+      });
+    if (
+      value === "All" ||
+      value === "Cases" ||
+      value === "Deaths" ||
+      value === "Recovered"
+    )
+      return value === "All" &&
+        (this.state.graphType === "Logarithmic" ||
+          this.state.graphType === "Linear")
         ? this.setState({ graphView: value })
-        : value === 'All'
-        ? this.setState({ graphView: value, graphType: 'Linear' })
+        : value === "All"
+        ? this.setState({ graphView: value, graphType: "Linear" })
         : this.setState({ graphView: value });
-    if (value === 'Linear' || value === 'Logarithmic' || value === 'Daily') return this.setState({ graphType: value });
+    if (value === "Linear" || value === "Logarithmic" || value === "Daily")
+      return this.setState({ graphType: value });
   };
 
   render() {
     const { all, daily, errors, graphView, graphType } = this.state;
     let buttonProps: { [key: string]: ToggleButtonProps } = {};
-    if (graphView === 'All') {
+    if (graphView === "All") {
       buttonProps = { Daily: { disabled: true } };
     }
     return (
       <React.Fragment>
-        <Grid container className={clsx(styles.gridContainer)} spacing={0} justify="center">
-          <Grid item className={styles.titleContainer} xs={12} sm={6} justify="center" alignContent="center">
-            <h1 style={{ fontFamily: 'Cairo, sans-serif !important', fontSize: '2rem' }}>Data Chart</h1>
+        <Grid
+          container
+          className={clsx(styles.gridContainer)}
+          spacing={0}
+          justify="center"
+        >
+          <Grid
+            item
+            className={styles.titleContainer}
+            xs={12}
+            sm={12}
+            justify="center"
+            alignContent="center"
+          >
+            <h1
+              style={{
+                fontFamily: "Cairo, sans-serif !important",
+                fontSize: "2rem",
+              }}
+            >
+              Data Chart
+            </h1>
           </Grid>
-          <Grid container item xs={12} sm={6}>
-            <Grid container item className={styles.btnContainer} justify="flex-end" xs={12} sm={12}>
+          <Grid container item xs={12} sm={12}>
+            <Grid
+              container
+              item
+              className={styles.btnContainer}
+              xs={12}
+              sm={6}
+              style={{ paddingLeft: "1%" }}
+            >
               <RenderToggleButtons
-                buttons={['All', 'Cases', 'Deaths', 'Recovered']}
+                buttons={["All", "Cases", "Deaths", "Recovered"]}
                 value={graphView}
                 onChange={this.handleChange}
               />
             </Grid>
-            <Grid container item className={styles.btnContainer} justify="flex-end" xs={12} sm={12}>
+            <Grid
+              container
+              item
+              className={styles.btnContainer}
+              justify="flex-end"
+              xs={12}
+              sm={6}
+            >
               <RenderToggleButtons
-                buttons={['Linear', 'Logarithmic', 'Daily']}
+                buttons={["Linear", "Logarithmic", "Daily"]}
                 value={graphType}
                 onChange={this.handleChange}
                 buttonProps={buttonProps}
@@ -90,8 +140,12 @@ class CountryCharts extends React.Component<Props, State> {
           </Grid>
           <Grid item className={styles.chartContainer} xs={12} sm={12}>
             <RenderChart
-              type={graphType === 'Linear' || graphType === 'Logarithmic' ? 'line' : 'bar'}
-              linearLog={graphType === 'Logarithmic' ? 'logarithmic' : 'linear'}
+              type={
+                graphType === "Linear" || graphType === "Logarithmic"
+                  ? "line"
+                  : "bar"
+              }
+              linearLog={graphType === "Logarithmic" ? "logarithmic" : "linear"}
               label={graphView}
               all={all}
               daily={daily}
