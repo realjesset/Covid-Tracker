@@ -1,7 +1,7 @@
-export { default as DataCards } from "./DataCards/DataCards";
-export { default as Home } from "./Home/Home";
-export { default as Header } from "./Header/Header";
-export { default as Footer } from "./Footer/Footer";
-// export { default as Chart } from "./Chart/Chart";
-// export { default as CountryPicker } from "./CountryPicker/CountryPicker";
-// export { default as NavBar } from "./NavBar/NavBar";
+export { default as Main } from './Main';
+export { default as Header } from './Header';
+export { default as Footer } from './Footer';
+export { default as InfoCards } from './HomeCards';
+export { default as Search } from './Search';
+export { default as CountryHeader } from './CountryHeader';
+export { default as CountryCharts } from './CountryCharts';

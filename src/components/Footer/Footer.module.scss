@@ -1,7 +1,15 @@
 .container {
-  width: fit-content !important;
-  margin-top: 50px !important;
-  align-items: center !important;
-  text-align: center !important;
-  margin-bottom: 50px !important;
+  margin: 0 0 !important;
+  padding: 0 0 !important;
+  text-align: center;
+
+  a {
+    text-decoration: underline;
+    font-weight: bolder !important;
+    color: unset !important
+  }
+}
+
+.Data {
+  margin-bottom: 10px !important;
 }

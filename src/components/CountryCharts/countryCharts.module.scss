@@ -1,0 +1,61 @@
+// .container {
+//     margin: 40px 0px 0px 0px !important;
+//     // padding: 0 0 !important;
+//     // align-content: center !important;
+//     // align-items: center !important;
+//     // text-align: center !important;
+//     min-width: 360px !important;
+//     min-height: 360px !important;
+//     width: 1080px !important;
+//     height: 1080px !important;
+//     max-height: 1080px !important;
+// }
+.active {
+  background-color: purple !important;
+}
+
+.gridContainer {
+  padding-top: 20px;
+  margin-bottom: 30px;
+  max-width: 1025px !important;
+  border-radius: 10px;
+  // box-shadow: 0 0px 20px 0.2px rgba(0, 0, 0, 0.2);
+  justify-self: center !important;
+}
+
+.titleContainer {
+  text-align: center !important;
+}
+
+.btnContainer {
+  margin-bottom: 20px !important;
+  margin-right: 10px !important;
+}
+
+@media only screen and (min-width: 900px) {
+  .chartContainer {
+    height: 720px !important;
+  }
+}
+
+@media only screen and (max-width: 1080px) {
+  .gridContainer {
+    width: 95% !important;
+    min-width: 300px !important;
+  }
+
+  .chartContainer {
+    height: 650px !important;
+  }
+}
+
+@media only screen and (max-width: 899px) {
+  .gridContainer {
+    width: 90% !important;
+    min-width: 300px !important;
+  }
+
+  .chartContainer {
+    max-height: 350px !important;
+  }
+}

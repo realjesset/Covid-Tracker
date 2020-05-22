@@ -1,0 +1,10 @@
+.span {
+  font-family: "Cairo", sans-serif;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  ::selection {
+    background-color: #7e57c2;
+    color: white;
+  }
+}

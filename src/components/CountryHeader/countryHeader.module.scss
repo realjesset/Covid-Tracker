@@ -1,0 +1,67 @@
+.container {
+  margin: 40px 0px 0px 0px !important;
+  padding: 0 0 !important;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  max-width: 1080px;
+}
+
+.flag {
+  width: 52px;
+  height: 42px;
+  margin-right: 10px;
+  border-radius: 5px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.flag-global {
+  width: 52px;
+  height: 52px;
+  margin-right: 4px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.titleContainer {
+  text-align: center !important;
+  justify-content: center;
+  height: fit-content;
+  align-items: center;
+
+  span {
+    height: fit-content;
+    vertical-align: middle;
+    font-size: 3rem
+  }
+}
+
+.moreDetailsContainer {
+  // max-width: 90% !important;
+  margin-top: 15px !important;
+  padding-right: 20px;
+  align-self: center;
+  text-align: right;
+
+  .moreDetailsPC {
+    // display: none;
+    vertical-align: middle;
+    text-align: right;
+    text-decoration: underline;
+  }
+
+  .moreDetailsMBL {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    text-align: right;
+  }
+
+
+}
+
+
+.date {
+  font-size: 0.6rem !important
+}

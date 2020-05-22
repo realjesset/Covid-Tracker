@@ -1,15 +1,7 @@
-type Country = {
-  name: string;
-  iso2: string | null;
-  iso3: string | null;
-  flag: string | null;
-};
-
-export const Countries: Array<Country> = [
+// list of all countries
+export const Countries = [
   {
     name: "Global",
-    iso2: null,
-    iso3: null,
     flag: "https://img.icons8.com/color/48/000000/europe.png",
   },
   {
@@ -344,8 +336,6 @@ export const Countries: Array<Country> = [
   },
   {
     name: "Diamond Princess",
-    iso2: null,
-    iso3: null,
     flag: "https://disease.sh/assets/img/flags/unknown.png",
   },
   {
@@ -710,8 +700,6 @@ export const Countries: Array<Country> = [
   },
   {
     name: "MS Zaandam",
-    iso2: null,
-    iso3: null,
     flag: "https://disease.sh/assets/img/flags/unknown.png",
   },
   {
