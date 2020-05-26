@@ -2,7 +2,7 @@
 export const Countries = [
   {
     name: "Global",
-    flag: "https://img.icons8.com/color/48/000000/europe.png",
+    flag: "https://cdn.pixabay.com/photo/2016/12/07/15/46/global-1889726_960_720.png",
   },
   {
     name: "Afghanistan",
