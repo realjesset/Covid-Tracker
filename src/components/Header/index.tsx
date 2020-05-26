@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./header.module.scss";
+import styles from "./Header.module.scss";
 
 import { logo } from "../../assets";
 import { RenderButton, RenderNotificaion } from "../common";

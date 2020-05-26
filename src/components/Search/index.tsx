@@ -115,11 +115,13 @@ const Search = ({ onCountryChange }: Props) => {
               {...params}
               label="Search"
               variant="outlined"
-              InputProps={{
-                classes: {
-                  notchedOutline: classes["&.MuiOutlinedInput-notchedOutline"],
-                },
-              }}
+              // InputProps={{
+              //   ...params.inputProps,
+              //   classes: {
+              //     notchedOutline: classes["&.MuiOutlinedInput-notchedOutline"],
+              //   },
+              //   autoComplete: "new-password"
+              // }}
               inputProps={{
                 ...params.inputProps,
                 autoComplete: "new-password", // disable autocomplete and autofill
