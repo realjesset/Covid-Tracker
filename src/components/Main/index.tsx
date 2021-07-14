@@ -59,29 +59,30 @@ class Main extends React.Component<
 
   render() {
     const { data, errors, loading } = this.state;
+    const {country, updated, countryInfo} = data
     // check for errors
     if (errors.length >= 1) return <RenderErrorBox errors={errors} />;
     return (
-      <React.Fragment>
+      <>
         <div className={styles.span}>
           <Header />
           {loading ? (
             <InfoCards data={data} loading={loading} />
           ) : (
-            <React.Fragment>
+            <>
               <Search onCountryChange={this.handleCountry} />
               <CountryHeader
-                name={data.country || "Global"}
-                date={data.updated}
-                flag={data.countryInfo && data.countryInfo.flag}
+                name={country || "Global"}
+                date={updated}
+                flag={countryInfo && countryInfo.flag}
               />
               <InfoCards data={data} loading={loading} />
-              <CountryCharts country={data.country || "Global"} />
+              <CountryCharts country={country || "Global"} />
               <Footer />
-            </React.Fragment>
+            </>
           )}
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

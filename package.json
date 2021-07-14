@@ -2,7 +2,7 @@
   "name": "covid",
   "version": "1.0.0",
   "private": true,
-  "license": "WTFPL",
+  "license": "MIT",
   "dependencies": {
     "@babel/core": "7.9.0",
     "@material-ui/core": "^4.9.13",

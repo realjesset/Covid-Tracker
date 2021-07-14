@@ -58,9 +58,13 @@ export function getCountries(): Country[] {
   return Countries;
 }
 
+/** 
+ * Fetches data from the API.
+ * if the country is not specified, it will return all countries.
+*/
 export async function fetchData(country?: string): Promise<APIDataReturn> {
   const query = `${url}${
-    country && country.toLowerCase() !== 'global' ? `/countries/${country}?allowNull=true` : '/all?allowNull=true'
+    country?.toLowerCase() !== 'global' ? `/countries/${country}?allowNull=true` : '/all?allowNull=true'
   }`;
   try {
     // requesting todays data
@@ -92,11 +96,13 @@ export async function fetchData(country?: string): Promise<APIDataReturn> {
     return { data };
   } catch (error) {
     // error handling
-    if (error.response === 404) return { error: 'Server not responding' };
+    if (error.response=== 404) return { error: 'Server not responding' };
     else return { error: 'Unexpected exception' };
   }
 }
-
+/** 
+ * Fetchs the historical data from the API.
+*/
 export async function fetchHistoryAll() {
   const jan = moment([2020, 0, 1]);
   const dateNow = moment(Date.now());
@@ -119,6 +125,9 @@ export async function fetchHistoryAll() {
   }
 }
 
+/** 
+ * Fetches the historical data for a specific country.
+*/
 export async function fetchHistory(country: string) {
   const jan = moment([2020, 0, 1]);
   const dateNow = moment(Date.now());
@@ -155,6 +164,9 @@ export async function fetchHistory(country: string) {
   }
 }
 
+/** 
+ * Maps the data to the daily format.
+*/
 function getDaily(data: APIHistorical, country: string): APIHistoricalRegion {
   let daily = { timeline: {}, country: country } as APIHistoricalRegion;
   Object.entries(data).map(async ([type, object]) => {
