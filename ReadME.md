@@ -1,10 +1,8 @@
-# Covid-19 Tracker by Glider
+# Covid-19 Tracker
 
 Yet another covid-19 tracker that now exists thanks to me! This is a very simple and minimalistic page with **DARK MODE** (finally)
 
 ![COVID-19 TRACKER](https://i.imgur.com/T5ZAB21.png)
-
-_do note this project won't be maintained properly so please fork before using it for production_
 
 ## Installation
 
